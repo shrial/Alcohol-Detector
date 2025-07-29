@@ -51,21 +51,21 @@ int main(void) {
 
         sensorReading = (LPC_ADC->ADGDR >> 4) & 0xFFF;  // Get the 12-bit result from ADC
 
-        // Calculate alcohol percentage
+        
         alcohol_percentage = (float)sensorReading * 100.0 / 4095.0;
 
-        // Adjust for the calibration offset (e.g., normal air gives 23.3% alcohol)
+        // Adjust for the calibration offset 
         alcohol_percentage -= NORMAL_AIR_OFFSET;
 
-        // Ensure the alcohol percentage doesn't go below 0%
+        
         if (alcohol_percentage < 0) {
             alcohol_percentage = 0;
         }
 
-        // Display alcohol level
+       
         sprintf(percentageStr, " %.1f%% ", alcohol_percentage);
 
-        // Alcohol Level Classification 
+       
         if (alcohol_percentage >= 50.0) {
             strcpy(disp_level, "HIGH");
         } else if (alcohol_percentage >= 20.0) {
